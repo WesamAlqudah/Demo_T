@@ -37,7 +37,7 @@ public class ProductServImp implements ProductServ {
     @Override
     public boolean update(Product p) {
 
-        return productRepo.update(Product);
+        return productRepo.update(p);
     }
 
     @Override

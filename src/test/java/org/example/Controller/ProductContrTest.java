@@ -2,6 +2,7 @@ package org.example.Controller;
 
 import org.example.entity.Product;
 import org.example.service.ProductServ;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,9 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
+import java.util.TimeZone;
 
 import static java.nio.file.Files.delete;
+import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.http.RequestEntity.put;
@@ -36,10 +41,12 @@ class ProductContrTest {
 
     @Autowired
     private MockMvc mockMvc;
-//
-//    @BeforeEach
-//    void setUp() {
-//    }
+
+    private static DateFormat df= new SimpleDateFormat("yyy-MM-dd'T':HH:mm:ss.SSSZ");
+    @BeforeEach
+    void setUp() {
+        df.setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
 
     @Test
     @DisplayName("GET / product/1 - Found")
